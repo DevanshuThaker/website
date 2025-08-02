@@ -1,102 +1,133 @@
-/* Set up background and general styles */
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+
+/* Background */
 body {
-    background-image: url("/img/background.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
-    font-family: 'Arial', sans-serif;
+    background: linear-gradient(to bottom right, #ffe6f0, #ffcce0);
+    font-family: 'Pacifico', cursive;
+    margin: 0;
     overflow: hidden;
 }
 
+/* Heading */
 h1 {
     position: absolute;
     left: 50%;
-    top: 20%;
+    top: 15%;
     transform: translateX(-50%);
-    background-color: hsl(0, 88%, 51%); /* red */
+    background-color: #ff66a3;
     color: white;
-    padding: 20px 40px;
-    border-radius: 10px;
-    font-size: 24px;
-    text-align: center;
-    box-shadow: 0 12px 16px rgba(0,0,0,0.24), 0 17px 50px rgba(0,0,0,0.19);
+    padding: 20px 50px;
+    border-radius: 20px;
+    font-size: 36px;
+    box-shadow: 0 10px 30px rgba(255, 105, 180, 0.4);
 }
 
-/* Style for buttons */
+/* Buttons */
 #yes-button, #no-button {
     position: absolute;
-    background-color: #4CAF50; /* Green */
+    background-color: #ff4da6;
     border: none;
     color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    font-size: 18px;
-    border-radius: 5px;
-    box-shadow: 0 12px 16px rgba(0,0,0,0.24), 0 17px 50px rgba(0,0,0,0.19);
+    padding: 15px 40px;
+    font-size: 20px;
+    border-radius: 50px;
+    box-shadow: 0 0 15px #ff99cc, 0 0 25px #ff66a3;
     cursor: pointer;
-    transition: transform 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+}
+
+#yes-button:hover, #no-button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 25px #ff66cc, 0 0 35px #ff66cc;
 }
 
 #yes-button {
-    left: 45%;
+    left: 40%;
     top: 50%;
     transform: translateX(-50%);
 }
 
 #no-button {
-    left: 55%;
+    left: 60%;
     top: 50%;
     transform: translateX(-50%);
 }
 
-#yes-button:hover, #no-button:hover {
-    transform: scale(1.1);
-}
-
-/* Styling for love message */
+/* Love message */
 #love-message {
     position: absolute;
-    top: 60%;
+    top: 65%;
     left: 50%;
     transform: translateX(-50%);
     display: none;
     font-size: 36px;
-    color: #ff1493; /* Deep pink color */
+    color: #ff1493;
     font-weight: bold;
-    text-align: center;
-    background-color: rgba(255, 255, 255, 0.8);
-    padding: 20px 40px;
-    border-radius: 10px;
-    box-shadow: 0 12px 16px rgba(0,0,0,0.24), 0 17px 50px rgba(0,0,0,0.19);
-    transition: opacity 1s ease-in-out;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 20px 50px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(255, 105, 180, 0.5);
 }
 
 /* Animations */
-@keyframes fadeIn {
-    0% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-    }
-}
-
 .fade-in {
     animation: fadeIn 2s ease-in-out;
 }
 
-@keyframes bounceIn {
-    0% {
-        transform: translateY(-100px);
-    }
-    60% {
-        transform: translateY(30px);
-    }
-    100% {
-        transform: translateY(0);
-    }
-}
-
 .bounce-in {
     animation: bounceIn 1s ease-out;
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+@keyframes bounceIn {
+    0% { transform: translateY(-100px); }
+    60% { transform: translateY(30px); }
+    100% { transform: translateY(0); }
+}
+
+/* Floating hearts background */
+.heart {
+    position: fixed;
+    width: 20px;
+    height: 20px;
+    background-color: red;
+    transform: rotate(45deg);
+    animation: float 8s linear infinite;
+    opacity: 0.7;
+    z-index: 0;
+}
+
+.heart::before,
+.heart::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: red;
+    border-radius: 50%;
+}
+
+.heart::before {
+    top: -10px;
+    left: 0;
+}
+
+.heart::after {
+    left: -10px;
+    top: 0;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0) rotate(45deg);
+        opacity: 0.7;
+    }
+    100% {
+        transform: translateY(-100vh) rotate(45deg);
+        opacity: 0;
+    }
 }
