@@ -1,19 +1,188 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Do you love me?</title>
-    <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Do You Love Me?</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet"/>
+
+    <style>
+        /* Embedded CSS */
+        body {
+            background: linear-gradient(to bottom right, #ffe6f0, #ffcce0);
+            font-family: 'Pacifico', cursive;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        h1 {
+            position: absolute;
+            left: 50%;
+            top: 15%;
+            transform: translateX(-50%);
+            background-color: #ff66a3;
+            color: white;
+            padding: 20px 50px;
+            border-radius: 20px;
+            font-size: 36px;
+            box-shadow: 0 10px 30px rgba(255, 105, 180, 0.4);
+        }
+
+        #yes-button, #no-button {
+            position: absolute;
+            background-color: #ff4da6;
+            border: none;
+            color: white;
+            padding: 15px 40px;
+            font-size: 20px;
+            border-radius: 50px;
+            box-shadow: 0 0 15px #ff99cc, 0 0 25px #ff66a3;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+        }
+
+        #yes-button:hover, #no-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 25px #ff66cc, 0 0 35px #ff66cc;
+        }
+
+        #yes-button {
+            left: 40%;
+            top: 50%;
+            transform: translateX(-50%);
+        }
+
+        #no-button {
+            left: 60%;
+            top: 50%;
+            transform: translateX(-50%);
+        }
+
+        #love-message {
+            position: absolute;
+            top: 65%;
+            left: 50%;
+            transform: translateX(-50%);
+            display: none;
+            font-size: 36px;
+            color: #ff1493;
+            font-weight: bold;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px 50px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(255, 105, 180, 0.5);
+        }
+
+        .fade-in {
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        .bounce-in {
+            animation: bounceIn 1s ease-out;
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        @keyframes bounceIn {
+            0% { transform: translateY(-100px); }
+            60% { transform: translateY(30px); }
+            100% { transform: translateY(0); }
+        }
+
+        /* Floating hearts */
+        .heart {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            background-color: red;
+            transform: rotate(45deg);
+            animation: float 8s linear infinite;
+            opacity: 0.7;
+            z-index: 0;
+        }
+
+        .heart::before,
+        .heart::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: red;
+            border-radius: 50%;
+        }
+
+        .heart::before {
+            top: -10px;
+            left: 0;
+        }
+
+        .heart::after {
+            left: -10px;
+            top: 0;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(45deg);
+                opacity: 0.7;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(45deg);
+                opacity: 0;
+            }
+        }
+    </style>
 </head>
 <body>
-    
+
     <h1>Do You Love Me?</h1>
+
     <div id="buttons">
-        <input id="yes-button" type="button" value="YES" onclick="clickYesButton()">
-        <input id="no-button" type="button" value="NO" onmouseover="hoverNoButton()">
+        <input id="yes-button" type="button" value="YES" onclick="clickYesButton()" />
+        <input id="no-button" type="button" value="NO" onmouseover="hoverNoButton()" />
     </div>
+
     <div id="love-message"></div>
-    <script src="scripts.js"></script>
+
+    <script>
+        function clickYesButton() {
+            const loveMessage = document.getElementById('love-message');
+            loveMessage.innerHTML = 'I love you too ❤️';
+            loveMessage.style.display = 'block';
+            loveMessage.classList.add('fade-in');
+            loveMessage.classList.add('bounce-in');
+
+            // Create floating hearts
+            for (let i = 0; i < 15; i++) {
+                createHeart();
+            }
+        }
+
+        function hoverNoButton() {
+            const x = Math.random() * (window.innerWidth - 150);
+            const y = Math.random() * (window.innerHeight - 50);
+            const btn = document.getElementById('no-button');
+            btn.style.left = x + 'px';
+            btn.style.top = y + 'px';
+        }
+
+        function createHeart() {
+            const heart = document.createElement("div");
+            heart.classList.add("heart");
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.top = "100vh";
+            heart.style.animationDuration = (Math.random() * 3 + 5) + "s";
+            document.body.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 8000);
+        }
+    </script>
 </body>
 </html>
